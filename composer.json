@@ -13,7 +13,7 @@
 		"installer-name": "ajax"
 	},
 	"require": {
-		"silverstripe/recipe-cms": "4.2.2",
+		"silverstripe/cms": "^4.0",
         "silvershop/core": "dev-master",
 		"markguinn/silverstripe-ajax": "~1.0.0"
 	}
