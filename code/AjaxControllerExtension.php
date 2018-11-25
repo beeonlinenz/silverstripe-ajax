@@ -2,6 +2,7 @@
 
 namespace MarkGuinn\SilverstripeAjax;
 
+use SilverStripe\ORM\DataExtension;
 use MarkGuinn\SilverstripeAjax\AjaxHttpResponse;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\AjaxHTTPRequest;
@@ -15,7 +16,7 @@ use SilverStripe\Control\HTTPResponse;
  * @date 04.03.2014
  * @package silverstripe-ajax
  */
-class AjaxControllerExtension extends Extension
+class AjaxControllerExtension extends DataExtension
 {
 
     protected $ajaxResponse;
