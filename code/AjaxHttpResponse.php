@@ -2,6 +2,7 @@
 
 namespace MarkGuinn\SilverstripeAjax;
     
+use SilverStripe\ORM\DataExtension;
 use MarkGuinn\SilverstripeAjax\AjaxControllerExtension;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\AjaxHTTPRequest;
