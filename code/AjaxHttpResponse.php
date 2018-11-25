@@ -16,7 +16,7 @@ use SilverStripe\Control\HTTPResponse;
  * @date 04.03.2014
  * @package silverstripe-ajax
  */
-class AjaxHTTPResponse extends SS_HTTPResponse
+class AjaxHTTPResponse extends HTTPResponse
 {
 
     const EVENTS_KEY  = 'events';
