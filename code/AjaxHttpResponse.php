@@ -1,6 +1,6 @@
 <?php
 
-namespace MarkGuinn/SilverstripeAjax
+namespace MarkGuinn/SilverstripeAjax;
     
 use MarkGuinn/SilverstripeAjax/AjaxControllerExtension;
 use SilverStripe\Control\HTTPRequest;
