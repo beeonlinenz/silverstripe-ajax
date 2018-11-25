@@ -1,8 +1,8 @@
 <?php
 
-namespace MarkGuinn/SilverstripeAjax;
+namespace MarkGuinn\SilverstripeAjax;
     
-use MarkGuinn/SilverstripeAjax/AjaxControllerExtension;
+use MarkGuinn\SilverstripeAjax\AjaxControllerExtension;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\AjaxHTTPRequest;
 use SilverStripe\Control\HTTPResponse;
