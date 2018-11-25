@@ -1,4 +1,11 @@
 <?php
+
+namespace MarkGuinn/SilverstripeAjax;
+
+use MarkGuinn/SilverstripeAjax/AjaxHttpResponse;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\AjaxHTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 /**
  * Catches errors and returns an AjaxHTTPResponse.
  * Could also add some helpers to controller for ajax functionality.
