@@ -7,6 +7,7 @@ use MarkGuinn\SilverstripeAjax\AjaxControllerExtension;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 
+
 /**
  * Special case of HTTP response that adds some helpers for ajax and
  * automatically handles the construction of the response.
