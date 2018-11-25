@@ -13,6 +13,6 @@
 		"installer-name": "ajax"
 	},
 	"require": {
-	     "silverstripe/recipde-cms": "^4.0"
+	     "silverstripe/recipe-cms": "^4.0"
 	}
 }
