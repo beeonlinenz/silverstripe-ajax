@@ -1,6 +1,6 @@
 ---
 Name: ajaxextensions
 ---
-Controller:
+SilverStripe\Control\Controller:
   extensions:
-    - AjaxControllerExtension
+    - MarkGuinn\SilverStripeAjax\AjaxControllerExtension

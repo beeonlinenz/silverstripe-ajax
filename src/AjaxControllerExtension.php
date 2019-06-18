@@ -1,11 +1,10 @@
 <?php
 
-namespace MarkGuinn\SilverstripeAjax;
+namespace MarkGuinn\SilverStripeAjax;
 
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\DataExtension;
-use MarkGuinn\SilverstripeAjax\AjaxHttpResponse;
 use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Control\HTTPResponse;
 
 
 /**
@@ -19,14 +18,13 @@ use SilverStripe\Control\HTTPResponse;
  */
 class AjaxControllerExtension extends DataExtension
 {
-
     protected $ajaxResponse;
 
     /**
-     * @param int            $errorCode
-     * @param SS_HTTPRequest $request
+     * @param int $errorCode
+     * @param HTTPRequest $request
      */
-    public function onBeforeHTTPError($errorCode, SS_HTTPRequest $request)
+    public function onBeforeHTTPError($errorCode, HTTPRequest $request)
     {
         // TODO: This should probably prevent the error page from generating in ajax and possibly return a json response
         // throw new SS_HTTPResponse_Exception($errorMessage, $errorCode);
@@ -39,7 +37,7 @@ class AjaxControllerExtension extends DataExtension
     public function getAjaxResponse()
     {
         if (!isset($this->ajaxResponse)) {
-            $this->ajaxResponse = Injector::inst()->create('AjaxHTTPResponse', $this->owner->getRequest());
+            $this->ajaxResponse = Injector::inst()->create(AjaxHttpResponse::class, $this->owner->getRequest());
         }
         return $this->ajaxResponse;
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace MarkGuinn\SilverstripeAjax;
+namespace MarkGuinn\SilverStripeAjax;
 
-use SilverStripe\ORM\DataExtension;
-use MarkGuinn\SilverstripeAjax\AjaxControllerExtension;
+use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
-
+use SilverStripe\View\ViewableData;
+use stdClass;
 
 /**
  * Special case of HTTP response that adds some helpers for ajax and
@@ -18,7 +18,6 @@ use SilverStripe\Control\HTTPResponse;
  */
 class AjaxHTTPResponse extends HTTPResponse
 {
-
     const EVENTS_KEY  = 'events';
     const REGIONS_KEY = 'regions';
     const PULL_PARAM  = '__regions__';
@@ -26,22 +25,22 @@ class AjaxHTTPResponse extends HTTPResponse
 
 
     /** @var array - CLIENT-SIDE events that will be triggered on the document. Key=event, value=data for event handler */
-    protected $events = array();
+    protected $events = [];
 
     /** @var array - Regions to send along. Key=Template, Value=HTML */
-    protected $regions = array();
+    protected $regions = [];
 
     /** @var array - Key/val store of objects a region can be rendered against. DEFAULT=current controller */
-    protected $renderContexts = array();
+    protected $renderContexts = [];
 
-    /** @var SS_HTTPRequest */
+    /** @var HTTPRequest */
     protected $request = null;
 
 
     /**
      * Create a new HTTP response
      *
-     * @param SS_HTTPRequest $request - The corresponding request object
+     * @param HTTPRequest $request - The corresponding request object
      * @param string $body - The body of the response
      * @param int $statusCode - The numeric status code - 200, 404, etc
      * @param string $statusDescription - The text to be given alongside the status code.
@@ -49,7 +48,7 @@ class AjaxHTTPResponse extends HTTPResponse
      */
     public function __construct($request = null, $body = null, $statusCode = null, $statusDescription = null)
     {
-        if ($request && $request instanceof SS_HTTPRequest) {
+        if ($request && $request instanceof HTTPRequest) {
             $this->request = $request;
         } elseif (is_string($request)) {
             // respond intelligently if someone uses the parent constructor syntax
@@ -64,7 +63,6 @@ class AjaxHTTPResponse extends HTTPResponse
         $this->addHeader('Content-type', 'application/json');
         $this->addRenderContext('DEFAULT', Controller::curr());
     }
-
 
     /**
      * Queues up an event to be triggered on the client when the response is received.
@@ -83,7 +81,6 @@ class AjaxHTTPResponse extends HTTPResponse
 
         return $this;
     }
-
 
     /**
      * @param string $template
@@ -113,7 +110,6 @@ class AjaxHTTPResponse extends HTTPResponse
 
         return $this;
     }
-
 
     /**
      * @return string
@@ -148,7 +144,6 @@ class AjaxHTTPResponse extends HTTPResponse
         return parent::getBody();
     }
 
-
     /**
      * @param string $name
      * @param ViewableData $obj
@@ -160,16 +155,14 @@ class AjaxHTTPResponse extends HTTPResponse
         return $this;
     }
 
-
     /**
      * @return $this
      */
     public function clearRenderContexts()
     {
-        $this->renderContexts = array();
+        $this->renderContexts = [];
         return $this;
     }
-
 
     /**
      * @param string $name
@@ -180,7 +173,6 @@ class AjaxHTTPResponse extends HTTPResponse
         return isset($this->renderContexts[$name]) ? $this->renderContexts[$name] : null;
     }
 
-
     /**
      * Looks first for the X-Pull-Regions header and then for a __regions__ get/post var.
      * @return array
@@ -188,7 +180,7 @@ class AjaxHTTPResponse extends HTTPResponse
     protected function getPulledRegionIDs()
     {
         if (!$this->request) {
-            return array();
+            return [];
         }
         $header = $this->request->getHeader(self::PULL_HEADER);
         if (!empty($header)) {

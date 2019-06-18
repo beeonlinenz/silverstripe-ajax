@@ -1,4 +1,13 @@
 <?php
+
+namespace MarkGuinn\SilverStripeAjax\Tests;
+
+use MarkGuinn\SilverStripeAjax\AjaxHTTPResponse;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\View\ArrayData;
+
 /**
  * Tests to cover AjaxHTTPResponse.
  *
@@ -9,7 +18,6 @@
  */
 class AjaxResponseTest extends SapphireTest
 {
-
     public function setUpOnce()
     {
         if (!Controller::has_extension('AjaxControllerExtension')) {
@@ -25,7 +33,6 @@ class AjaxResponseTest extends SapphireTest
         $this->assertEquals('{}', $r->getBody());
     }
 
-
     public function testTriggerEvent()
     {
         $r = new AjaxHTTPResponse();
@@ -38,7 +45,6 @@ class AjaxResponseTest extends SapphireTest
         $this->assertEquals(4, $data[AjaxHTTPResponse::EVENTS_KEY]['cartchange']['qty'], 'should correctly pass on the event data');
     }
 
-
     protected function getMockWithCart()
     {
         return new ArrayData(array(
@@ -47,7 +53,6 @@ class AjaxResponseTest extends SapphireTest
             )),
         ));
     }
-
 
     public function testPushRegion()
     {
@@ -69,11 +74,10 @@ class AjaxResponseTest extends SapphireTest
         );
     }
 
-
     public function testPullRegion()
     {
         // this is a dirty dirty mess. sorry.
-        $req = new SS_HTTPRequest('GET', '/test1');
+        $req = new HTTPRequest('GET', '/test1');
         $req->addHeader(AjaxHTTPResponse::PULL_HEADER, 'TestSideCart,TestOrderHistory');
         $req->addHeader('X-Requested-With', 'XMLHttpRequest');
         $ctrl = new Controller();
@@ -89,11 +93,10 @@ class AjaxResponseTest extends SapphireTest
         $this->assertNotEmpty($data[AjaxHTTPResponse::REGIONS_KEY]['TestOrderHistory']);
     }
 
-
     public function testPullRegionByParam()
     {
         // this is a dirty dirty mess. sorry.
-        $req = new SS_HTTPRequest('GET', '/test1', array(AjaxHTTPResponse::PULL_PARAM => 'TestSideCart,TestOrderHistory'));
+        $req = new HTTPRequest('GET', '/test1', array(AjaxHTTPResponse::PULL_PARAM => 'TestSideCart,TestOrderHistory'));
         $ctrl = new Controller();
         $ctrl->pushCurrent();
         $ctrl->setRequest($req);
@@ -109,11 +112,10 @@ class AjaxResponseTest extends SapphireTest
         $this->assertNotEmpty($data[AjaxHTTPResponse::REGIONS_KEY]['TestOrderHistory']);
     }
 
-
     public function testPullRegionWithRenderContext()
     {
         // this is a dirty dirty mess. sorry.
-        $req = new SS_HTTPRequest('GET', '/test1');
+        $req = new HTTPRequest('GET', '/test1');
         $req->addHeader(AjaxHTTPResponse::PULL_HEADER, 'TestProductGroupItem:BUYABLE');
         $req->addHeader('X-Requested-With', 'XMLHttpRequest');
         $ctrl = new Controller();
@@ -134,8 +136,6 @@ class AjaxResponseTest extends SapphireTest
 
         $this->assertNotEmpty($data[AjaxHTTPResponse::REGIONS_KEY]['TestProductGroupItem']);
     }
-
-
 
     // TODO: http errors
     // TODO: html/xml output
