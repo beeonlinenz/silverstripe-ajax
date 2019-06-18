@@ -47,7 +47,7 @@ Include base.js, base.css, and any status message and/or modal adapters.
 
 Requires
 --------
-- Silverstripe 3.1+
+- Silverstripe 4.4.1+
 - jQuery 1.7+ (including current, 2.x etc)
 
 
