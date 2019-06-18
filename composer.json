@@ -1,5 +1,5 @@
 {
-    "name": "markguinn/silverstripe-ajax",
+    "name": "internetrix/silverstripe-ajax",
     "description": "Foundational ajax support for Silverstripe CMS: push/pull server-side regions, trigger client-side events, modals, status messages.",
     "type": "silverstripe-vendormodule",
     "keywords": [
