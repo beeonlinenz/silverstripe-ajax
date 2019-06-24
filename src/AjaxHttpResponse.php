@@ -88,7 +88,7 @@ class AjaxHTTPResponse extends HTTPResponse
      * @param array $data [optional] - if present, renderObj will be customised with this data
      * @return $this
      */
-    public function pushRegion($template, $contextObj=null, $data=null)
+    public function pushRegion($template, $contextObj=null, $data=null, $className=null)
     {
         if (!empty($template)) {
             // add the default render target if none is present
@@ -102,9 +102,11 @@ class AjaxHTTPResponse extends HTTPResponse
                 $contextObj = $this->getRenderContext($contextName);
             }
 
-            if (!isset($this->regions[$template])) {
+            $key = $className ?: $template;
+
+            if (!isset($this->regions[$key])) {
                 // render the region
-                $this->regions[$template] = $contextObj ? $contextObj->renderWith($template, $data)->forTemplate() : '';
+                $this->regions[$key] = $contextObj ? $contextObj->renderWith($template, $data)->forTemplate() : '';
             }
         }
 
