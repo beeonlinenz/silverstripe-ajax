@@ -34,10 +34,10 @@ class AjaxControllerExtension extends DataExtension
     /**
      * @return AjaxHTTPResponse
      */
-    public function getAjaxResponse()
+    public function getAjaxResponse($request = null)
     {
         if (!isset($this->ajaxResponse)) {
-            $this->ajaxResponse = Injector::inst()->create(AjaxHttpResponse::class, $this->owner->getRequest());
+            $this->ajaxResponse = Injector::inst()->create(AjaxHttpResponse::class, $request ?: $this->owner->getRequest());
         }
         return $this->ajaxResponse;
     }
